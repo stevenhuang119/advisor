@@ -1,3 +1,3 @@
 """advisor REST API."""
 
-from backend.api.students import get_class_description
+from backend.api.resources import get_class_description
