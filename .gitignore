@@ -1,1 +1,6 @@
 env
+*__pycache__*
+tmp
+cookies.txt
+session.json
+backend.egg-info

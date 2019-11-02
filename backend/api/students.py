@@ -3,8 +3,8 @@ import flask
 import backend
 
 
-@backend.app.route('/api/v1/class/<class_name>/', methods=["GET"])
-def get_students(class_name):
+@backend.app.route('/api/v1/class_description/<class_name>/', methods=["GET"])
+def get_class_description(class_name):
     """Return likes on postid.
 
     Example:
@@ -18,7 +18,6 @@ def get_students(class_name):
     context = {
         "student_name": 'Steven Huang',
         "course_name": class_name,
-        "postid": 1,
         "url": flask.request.path,
         "description": 'an introduction class on data structure and algorithm'
     }
