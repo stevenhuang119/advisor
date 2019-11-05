@@ -1,7 +1,7 @@
 """REST API for likes."""
 import flask
 import backend
-
+from flask import request, abort
 
 @backend.app.route('/api/v1/class_description/<class_name>/', methods=["GET"])
 def get_class_description(class_name):
@@ -15,3 +15,12 @@ def get_class_description(class_name):
         "description": 'an introduction class on data structure and algorithm'
     }
     return flask.jsonify(**context)
+
+@backend.app.route('/webhook_test', methods=['GET','POST'])
+def webhook_test():
+    if request.method == 'POST':
+        print(request.json)
+        return '', 200
+
+    else:
+        abort(400)
