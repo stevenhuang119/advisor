@@ -24,3 +24,39 @@ def webhook_test():
 
     else:
         abort(400)
+
+@backend.app.route('/api/v1/advisor_webhook', methods=['POST'])
+def advisor_webhook(): 
+    
+    body = request.json
+
+    if body['state'] == "course_info":
+        body['slots']['course_name']['values'][0]['resolved'] = 1
+        body['slots']['course_name']['values'][0]['value'] = "Response for course info inquiry" 
+
+        return flask.jsonify(body)
+
+    elif body['state'] == "course_description":
+        body['slots']['course_name']['values'][0]['resolved'] = 1
+        body['slots']['course_name']['values'][0]['value'] = "Response for course description inquiry" 
+
+        return flask.jsonify(body)
+
+    elif body['state'] == "course_grade_distribution":
+        body['slots']['course_name']['values'][0]['resolved'] = 1
+        body['slots']['course_name']['values'][0]['value'] = "Response for course grade distribution inquiry" 
+
+        return flask.jsonify(body)
+
+    elif body['state'] == "course_prereq":
+        body['slots']['course_name']['values'][0]['resolved'] = 1
+        body['slots']['course_name']['values'][0]['value'] = "Response for course prereq inquiry" 
+
+
+        return flask.jsonify(body)
+
+    else:
+        abort(500)
+
+
+
