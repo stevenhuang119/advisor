@@ -36,28 +36,28 @@ def advisor_webhook():
         if body['state'] == "course_info":
             body['slots']['_COURSE_NAME_']['values'][0]['resolved'] = 1
             course = body['slots']['_COURSE_NAME_']['values'][0]['course_mapper']
-            body['slots']['_COURSE_NAME_']['values'][0]['info'] = 'Response for %s info inquiry' % course 
+            body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'Response for %s info inquiry' % course 
 
             return flask.jsonify(body)
 
         elif body['state'] == "course_description":
             body['slots']['_COURSE_NAME_']['values'][0]['resolved'] = 1
             course = body['slots']['_COURSE_NAME_']['values'][0]['course_mapper']
-            body['slots']['_COURSE_NAME_']['values'][0]['description'] = 'Response for %s description inquiry' % course 
+            body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'Response for %s description inquiry' % course 
 
             return flask.jsonify(body)
 
         elif body['state'] == "course_grade_distribution":
             body['slots']['_COURSE_NAME_']['values'][0]['resolved'] = 1
             course = body['slots']['_COURSE_NAME_']['values'][0]['course_mapper']
-            body['slots']['_COURSE_NAME_']['values'][0]['grade_distribution'] = 'Response for %s grade distribution inquiry' % course 
+            body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'Response for %s grade distribution inquiry' % course 
 
             return flask.jsonify(body)
 
         elif body['state'] == "course_prereq":
             body['slots']['_COURSE_NAME_']['values'][0]['resolved'] = 1
             course = body['slots']['_COURSE_NAME_']['values'][0]['course_mapper']
-            body['slots']['_COURSE_NAME_']['values'][0]['prereq'] = 'Response for %s prereq inquiry' % course 
+            body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'Response for %s prereq inquiry' % course 
 
             return flask.jsonify(body)
 
