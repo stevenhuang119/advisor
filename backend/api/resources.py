@@ -31,36 +31,38 @@ def advisor_webhook():
     body = request.json
 
     print(body)
-    
-    return flask.jsonify(body)
 
-    # if body['state'] == "course_info":
-    #     body['slots']['course_name']['values'][0]['resolved'] = 1
-    #     body['slots']['course_name']['values'][0]['value'] = "Response for course info inquiry" 
+    if '_COURSE_NAME_' in body['slots']:
+        if body['state'] == "course_info":
+            body['slots']['_COURSE_NAME_']['values'][0]['resolved'] = 1
+            course = body['slots']['_COURSE_NAME_']['values'][0]['course_mapper']
+            body['slots']['_COURSE_NAME_']['values'][0]['info'] = 'Response for %s info inquiry' % course 
 
-    #     return flask.jsonify(body)
+            return flask.jsonify(body)
 
-    # elif body['state'] == "course_description":
-    #     body['slots']['course_name']['values'][0]['resolved'] = 1
-    #     body['slots']['course_name']['values'][0]['value'] = "Response for course description inquiry" 
+        elif body['state'] == "course_description":
+            body['slots']['_COURSE_NAME_']['values'][0]['resolved'] = 1
+            course = body['slots']['_COURSE_NAME_']['values'][0]['course_mapper']
+            body['slots']['_COURSE_NAME_']['values'][0]['description'] = 'Response for %s description inquiry' % course 
 
-    #     return flask.jsonify(body)
+            return flask.jsonify(body)
 
-    # elif body['state'] == "course_grade_distribution":
-    #     body['slots']['course_name']['values'][0]['resolved'] = 1
-    #     body['slots']['course_name']['values'][0]['value'] = "Response for course grade distribution inquiry" 
+        elif body['state'] == "course_grade_distribution":
+            body['slots']['_COURSE_NAME_']['values'][0]['resolved'] = 1
+            course = body['slots']['_COURSE_NAME_']['values'][0]['course_mapper']
+            body['slots']['_COURSE_NAME_']['values'][0]['grade_distribution'] = 'Response for %s grade distribution inquiry' % course 
 
-    #     return flask.jsonify(body)
+            return flask.jsonify(body)
 
-    # elif body['state'] == "course_prereq":
-    #     body['slots']['course_name']['values'][0]['resolved'] = 1
-    #     body['slots']['course_name']['values'][0]['value'] = "Response for course prereq inquiry" 
+        elif body['state'] == "course_prereq":
+            body['slots']['_COURSE_NAME_']['values'][0]['resolved'] = 1
+            course = body['slots']['_COURSE_NAME_']['values'][0]['course_mapper']
+            body['slots']['_COURSE_NAME_']['values'][0]['prereq'] = 'Response for %s prereq inquiry' % course 
 
+            return flask.jsonify(body)
 
-    #     return flask.jsonify(body)
-
-    # else:
-    #     abort(500)
+    else:
+        abort(500)
 
 
 
