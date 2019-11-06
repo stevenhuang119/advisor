@@ -4,7 +4,8 @@ import backend
 import pandas as pd
 from flask import request, abort
 
-class_data = pd.read('coursework.csv')
+
+class_data = pd.read_csv('backend/api/coursework.csv')
 @backend.app.route('/api/v1/course_description/', methods=['GET', 'POST'])
 def get_class_description():
     """
@@ -30,9 +31,8 @@ def webhook_test():
 
 @backend.app.route('/api/v1/advisor_webhook', methods=['POST'])
 def advisor_webhook(): 
-    print(class_data)
     body = request.json
-
+    print(class_data)
     if body['state'] == "course_info":
         body['slots']['course_name']['values'][0]['resolved'] = 1
         body['slots']['course_name']['values'][0]['value'] = "Response for course info inquiry" 
