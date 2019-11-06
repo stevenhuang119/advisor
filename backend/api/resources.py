@@ -1,6 +1,7 @@
 """REST API for likes."""
 import flask
 import backend
+import pandas as pd
 from flask import request, abort
 
 @backend.app.route('/api/v1/course_description/', methods=['GET', 'POST'])
@@ -28,7 +29,7 @@ def webhook_test():
 
 @backend.app.route('/api/v1/advisor_webhook', methods=['POST'])
 def advisor_webhook(): 
-    
+    data_frame = pd.read('coursework.csv')
     body = request.json
 
     if body['state'] == "course_info":
@@ -58,6 +59,3 @@ def advisor_webhook():
 
     else:
         abort(500)
-
-
-
