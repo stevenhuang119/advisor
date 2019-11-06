@@ -1,7 +1,7 @@
 """REST API for likes."""
 import flask
 import backend
-
+from flask import request, abort
 
 @backend.app.route('/api/v1/course_description/', methods=['GET', 'POST'])
 def get_class_description():
@@ -15,58 +15,49 @@ def get_class_description():
         "url": flask.request.path,
         "description": 'an introduction class on data structure and algorithm'
     }
-
-    if flask.request.method == 'POST':
-        # handling the json payload and run them through simple business logic first
-        raw_slots = flask.request.json['response']['slots'] # slots is an array of slot dictionaries
-
-        slot_map = {}
-        for slot in raw_slots:
-            slot_map[slot['slot']] = slot['raw_value'][0]
-
-        print(slot_map)
-
-        # modify the json payload to construct the response
-        response = flask.request.json
-        response['response']['slots'].append({
-                'slot': 'description',
-                'raw_value': ['eecs281 is an introduction class that covers data structure and algorithms']
-            })
-
-        return flask.jsonify(**response)
-
     return flask.jsonify(**context)
 
+@backend.app.route('/webhook_test', methods=['GET','POST'])
+def webhook_test():
+    if request.method == 'POST':
+        print(request.json)
+        return '', 200
 
-@backend.app.route('/api/v1/course_recommendation/', methods=['GET', 'POST'])
-def get_class_recommendation():
-    """
-    Handle the recommendation competency JSON payloads with B.L. 
-    """
-    return 
+    else:
+        abort(400)
+
+@backend.app.route('/api/v1/advisor_webhook', methods=['POST'])
+def advisor_webhook(): 
+    
+    body = request.json
+
+    if body['state'] == "course_info":
+        body['slots']['course_name']['values'][0]['resolved'] = 1
+        body['slots']['course_name']['values'][0]['value'] = "Response for course info inquiry" 
+
+        return flask.jsonify(body)
+
+    elif body['state'] == "course_description":
+        body['slots']['course_name']['values'][0]['resolved'] = 1
+        body['slots']['course_name']['values'][0]['value'] = "Response for course description inquiry" 
+
+        return flask.jsonify(body)
+
+    elif body['state'] == "course_grade_distribution":
+        body['slots']['course_name']['values'][0]['resolved'] = 1
+        body['slots']['course_name']['values'][0]['value'] = "Response for course grade distribution inquiry" 
+
+        return flask.jsonify(body)
+
+    elif body['state'] == "course_prereq":
+        body['slots']['course_name']['values'][0]['resolved'] = 1
+        body['slots']['course_name']['values'][0]['value'] = "Response for course prereq inquiry" 
 
 
-@backend.app.route('/api/v1/clean_bye/', methods=['GET', 'POST'])
-def get_clean_goodbye():
-    """
-    Clean the database with user specific information
-    """
-    return 
+        return flask.jsonify(body)
+
+    else:
+        abort(500)
 
 
-@backend.app.route('/api/v1/clean_hello/', methods=['GET', 'POST'])
-def get_clean_hello():
-    """
-    Clean the database with user specific information
-    """
-    return
 
-
-@backend.app.route('/', methods=['GET'])
-def index():
-    """
-    Redirect any visit to the website to the REST 
-
-    TODO: direct to the react front end in the future 
-    """
-    return flask.redirect('/api/v1/course_description/')
