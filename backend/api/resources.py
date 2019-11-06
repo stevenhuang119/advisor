@@ -6,7 +6,7 @@ from flask import request, abort
 
 
 class_data = pd.read_csv('backend/api/coursework.csv')
-class_data.set_index('Course')
+class_data.set_index('Course', inplace=True)
 @backend.app.route('/api/v1/course_description/', methods=['GET', 'POST'])
 def get_class_description():
     """
@@ -33,11 +33,7 @@ def webhook_test():
 @backend.app.route('/api/v1/advisor_webhook', methods=['POST'])
 def advisor_webhook(): 
     body = request.json
-    print(class_data)
-    if body['state'] == "course_info":
-        body['slots']['course_name']['values'][0]['resolved'] = 1
-        body['slots']['course_name']['values'][0]['value'] = "Response for course info inquiry" 
-
+    
     print(body)
 
     if '_COURSE_NAME_' in body['slots']:
@@ -58,7 +54,7 @@ def advisor_webhook():
             course = body['slots']['_COURSE_NAME_']['values'][0]['course_mapper']
 
             if course in class_data.index: 
-                body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'The description for ' + course + ' is the following:\n' + class_data.loc[course]['Description']     
+                body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'The description for ' + course + ' is the following: ' + class_data.loc[course]['Description']     
 
             else:
                 body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'Sorry, class does not exist' 
@@ -83,7 +79,7 @@ def advisor_webhook():
             course = body['slots']['_COURSE_NAME_']['values'][0]['course_mapper']
             
             if course in class_data.index: 
-                body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'The prerequisites for ' + course + 'are the following:\n' + class_data.loc[course]['Prerequisites']     
+                body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'The prerequisites for ' + course + ' are the following: ' + class_data.loc[course]['Prerequisites']     
 
             else:
                 body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'Sorry, class does not exist' 
