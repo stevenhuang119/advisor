@@ -3,6 +3,9 @@ advisor development configuration.
 """
 
 import os
+import pandas as pd
+
+class_data = pd.read_csv("coursework.csv")
 
 # Root of this application, useful if it doesn't occupy an entire domain
 APPLICATION_ROOT = '/'
