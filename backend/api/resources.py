@@ -1,8 +1,11 @@
 """REST API for likes."""
 import flask
 import backend
+import pandas as pd
 from flask import request, abort
 
+
+class_data = pd.read_csv('backend/api/coursework.csv')
 @backend.app.route('/api/v1/course_description/', methods=['GET', 'POST'])
 def get_class_description():
     """
@@ -28,8 +31,11 @@ def webhook_test():
 
 @backend.app.route('/api/v1/advisor_webhook', methods=['POST'])
 def advisor_webhook(): 
-    
     body = request.json
+    print(class_data)
+    if body['state'] == "course_info":
+        body['slots']['course_name']['values'][0]['resolved'] = 1
+        body['slots']['course_name']['values'][0]['value'] = "Response for course info inquiry" 
 
     print(body)
 
@@ -44,7 +50,9 @@ def advisor_webhook():
             else:
                 body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'Sorry, class does not exist' 
 
-            return flask.jsonify(body)
+    elif body['state'] == "course_description":
+        body['slots']['course_name']['values'][0]['resolved'] = 1
+        body['slots']['course_name']['values'][0]['value'] = "Response for course description inquiry" 
 
         elif body['state'] == "course_description":
             body['slots']['_COURSE_NAME_']['values'][0]['resolved'] = 1
@@ -55,8 +63,11 @@ def advisor_webhook():
 
             else:
                 body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'Sorry, class does not exist' 
+        return flask.jsonify(body)
 
-            return flask.jsonify(body)
+    elif body['state'] == "course_grade_distribution":
+        body['slots']['course_name']['values'][0]['resolved'] = 1
+        body['slots']['course_name']['values'][0]['value'] = "Response for course grade distribution inquiry" 
 
         elif body['state'] == "course_grade_distribution":
             body['slots']['_COURSE_NAME_']['values'][0]['resolved'] = 1
@@ -67,8 +78,11 @@ def advisor_webhook():
 
             else:
                 body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'Sorry, class does not exist' 
+        return flask.jsonify(body)
 
-            return flask.jsonify(body)
+    elif body['state'] == "course_prereq":
+        body['slots']['course_name']['values'][0]['resolved'] = 1
+        body['slots']['course_name']['values'][0]['value'] = "Response for course prereq inquiry" 
 
         elif body['state'] == "course_prereq":
             body['slots']['_COURSE_NAME_']['values'][0]['resolved'] = 1
@@ -80,10 +94,7 @@ def advisor_webhook():
             else:
                 body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'Sorry, class does not exist' 
 
-            return flask.jsonify(body)
+        return flask.jsonify(body)
 
     else:
         abort(500)
-
-
-
