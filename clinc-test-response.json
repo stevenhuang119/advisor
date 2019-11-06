@@ -1,0 +1,84 @@
+{
+  "response": {
+    "type": "course_info",
+    "slots": [
+      {
+        "slot": "_COURSE_MAPPER_",
+        "raw_value": [
+          "eecs485"
+        ],
+        "visual": "['eecs485']",
+        "speakable": "['eecs485']"
+      },
+      {
+        "slot": "_COURSE_NAME_",
+        "raw_value": [
+          "eecs 485"
+        ],
+        "visual": "['eecs 485']",
+        "speakable": "['eecs 485']"
+      }
+    ],
+    "query": "hello I want eecs 485 info"
+  },
+  "version": "release-v0.8.19.1",
+  "qid": "70980a8f-4901-44b9-9f5b-64ef048ebc32",
+  "user": "f2797b61-7191-4f8d-a111-af283d4c9f21",
+  "institution_id": "17643614-25d3-4ed4-adea-9e3d6b93fd6e",
+  "today": "2019-11-05T18:40:05.966Z",
+  "slots": {
+    "_COURSE_NAME_": [
+      "eecs 485"
+    ],
+    "_COURSE_MAPPER_": [
+      "eecs485"
+    ]
+  },
+  "sentiment": 0,
+  "is_repeat": false,
+  "ai_version": "dd533b0e-c6e6-4e11-8806-517d480a9d2c",
+  "device": "default",
+  "dialog": "WEmMFDd0OdkDkYZ05pmhE1eKR0h0WjmL",
+  "lat": 0,
+  "lon": 0,
+  "time_offset": 0,
+  "external_user_id": "1",
+  "query": "hello I want eecs 485 info",
+  "classifier": "stateful-pfm-wm-clean",
+  "intent_raw": "course_description_start",
+  "intent": "course_description_start",
+  "certainty": true,
+  "intent_probability": 0.5184525527638495,
+  "is_correction": true,
+  "classifier_state": "course_description",
+  "competency": "course_info",
+  "platform": "web",
+  "browser": "Other",
+  "slot_probabilities": {
+    "_COURSE_NAME_": [
+      0.992573618888855
+    ]
+  },
+  "slot_token_ranges": {
+    "_COURSE_NAME_": [
+      {
+        "start": 3,
+        "end": 4
+      }
+    ]
+  },
+  "session_id": "neogv8p79qao78ki9kr3h0sgdkvxma46",
+  "visuals": {
+    "formattedResponse": "You asked about the course info",
+    "speakableResponse": "You asked about the course info"
+  },
+  "personality_id": "abe083ec-4849-42df-bc19-78895ac498c6",
+  "competency_id": "e0c0c502-4e77-4db9-82c5-1dc25936341a",
+  "latencies": {
+    "total": 1.442881294991821,
+    "external_api": null,
+    "webhook_total": null,
+    "webhook_latency": {}
+  },
+  "latency": 1.442881294991821
+}
