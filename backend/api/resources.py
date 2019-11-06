@@ -6,6 +6,7 @@ from flask import request, abort
 
 
 class_data = pd.read_csv('backend/api/coursework.csv')
+class_data.set_index('Course')
 @backend.app.route('/api/v1/course_description/', methods=['GET', 'POST'])
 def get_class_description():
     """
@@ -44,57 +45,50 @@ def advisor_webhook():
             body['slots']['_COURSE_NAME_']['values'][0]['resolved'] = 1
             course = body['slots']['_COURSE_NAME_']['values'][0]['course_mapper']
 
-            if course in class_data:
+            if course in class_data.index:
                 body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'What would you like to know about %s?' % course     
 
             else:
                 body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'Sorry, class does not exist' 
 
-    elif body['state'] == "course_description":
-        body['slots']['course_name']['values'][0]['resolved'] = 1
-        body['slots']['course_name']['values'][0]['value'] = "Response for course description inquiry" 
+            return flask.jsonify(body)
 
         elif body['state'] == "course_description":
             body['slots']['_COURSE_NAME_']['values'][0]['resolved'] = 1
             course = body['slots']['_COURSE_NAME_']['values'][0]['course_mapper']
 
-            if course in class_data: 
+            if course in class_data.index: 
                 body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'The description for ' + course + ' is the following:\n' + class_data.loc[course]['Description']     
 
             else:
                 body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'Sorry, class does not exist' 
-        return flask.jsonify(body)
 
-    elif body['state'] == "course_grade_distribution":
-        body['slots']['course_name']['values'][0]['resolved'] = 1
-        body['slots']['course_name']['values'][0]['value'] = "Response for course grade distribution inquiry" 
+            return flask.jsonify(body)
 
         elif body['state'] == "course_grade_distribution":
             body['slots']['_COURSE_NAME_']['values'][0]['resolved'] = 1
             course = body['slots']['_COURSE_NAME_']['values'][0]['course_mapper']
             
-            if course in class_data: 
+            if course in class_data.index: 
                 body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'The average grade for ' + course + ' is ' + class_data.loc[course]['Median Grade']
 
             else:
                 body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'Sorry, class does not exist' 
-        return flask.jsonify(body)
 
-    elif body['state'] == "course_prereq":
-        body['slots']['course_name']['values'][0]['resolved'] = 1
-        body['slots']['course_name']['values'][0]['value'] = "Response for course prereq inquiry" 
+            return flask.jsonify(body)
+
 
         elif body['state'] == "course_prereq":
             body['slots']['_COURSE_NAME_']['values'][0]['resolved'] = 1
             course = body['slots']['_COURSE_NAME_']['values'][0]['course_mapper']
             
-            if course in class_data: 
+            if course in class_data.index: 
                 body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'The prerequisites for ' + course + 'are the following:\n' + class_data.loc[course]['Prerequisites']     
 
             else:
                 body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'Sorry, class does not exist' 
 
-        return flask.jsonify(body)
+            return flask.jsonify(body)
 
     else:
         abort(500)
