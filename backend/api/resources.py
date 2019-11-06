@@ -26,8 +26,6 @@ def get_class_description():
 
         print(slot_map)
 
-        class_name = slot_map['_COURSE_MAPPER_']
-
         # modify the json payload to construct the response
         response = flask.request.json
         response['response']['slots'].append({
