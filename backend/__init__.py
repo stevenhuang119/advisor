@@ -2,9 +2,12 @@
 advisor package initializer.
 """
 import flask
+from flask_bootstrap import Bootstrap 
 
 # app is a single object used by all the code modules in this package
 app = flask.Flask(__name__, static_folder="static", template_folder="templates")  # pylint: disable=invalid-name
+
+Bootstrap(app)
 
 app.config.from_object('backend.config')
 
