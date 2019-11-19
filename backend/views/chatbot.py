@@ -32,9 +32,21 @@ def clinc_process():
 
         resp = requests.post(url, json=payload, headers=headers)
 
+        print(resp.json())
+
+        dept = "null"
+        course = "null"
+
+        if resp.json()['response']['slots']:
+            course_ret = resp.json()['response']['slots'][0]['raw_value']['values'][0]['course_mapper']
+            course_ar = course_ret.split()
+            dept = course_ar[0]
+            course = course_ar[1]
+
+
         ret = resp.json()['visuals']['formattedResponse']
 
-        return jsonify(result = ret)
+        return jsonify(result = ret, dept = dept, course = course)
 
 
     except Exception as e:
