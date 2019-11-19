@@ -3,9 +3,9 @@ function add_row_right(text) {
     
     div.className = 'row'; 
 
-    div.innerHTML = "<p align='right'>" + text + "</p>"; 
+    div.innerHTML = "<div class='panel panel-default'><div class='panel-body' align='right'>" + text + "</div></div>"; 
 
-    document.getElementById('first_div').appendChild(div);
+    document.getElementById('chat_body').appendChild(div);
 }
 
 function add_row_left(text) {
@@ -13,9 +13,9 @@ function add_row_left(text) {
     
     div.className = 'row'; 
 
-    div.innerHTML = "<p>" + text + "</p>"; 
+    div.innerHTML = "<div class='panel panel-default'><div class='panel-body'>" + text + "</div></div>"; 
 
-    document.getElementById('first_div').appendChild(div);
+    document.getElementById('chat_body').appendChild(div);
 }
 
 

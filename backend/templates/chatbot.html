@@ -5,17 +5,25 @@ Welcome to the aDViSOR
 {% endblock %}
 
 {% block content %}
-<div class="jumbotron jumbotron-fluid">
+<div class="page-header">
     <div class="container">
-        <h1 class="display-4">aDViSOR</h1>
+        <h1>aDViSOR</h1>
     </div>
 </div>
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6" id='first_div'>
+            <iframe src="{{ url_for('static', filename='images/robo_advisor.jpg') }}" style='height:400px;width:600px;'></iframe>
         </div>
         <div class="col-md-6">
+            <div class='panel panel-default'>
+                <div class='panel-heading'>Chat</div>
+                <div class='panel-body fixed-panel'  id='chat_body'>
+                <!-- This is where chat is inserted -->
+                </div>
+            </div>
+
             <form>
                 <input type='text' class='form-control' id='chat_text' placeholder="Type here...">
                 <a href='#' id='chat_input'><button type="submit" class="btn btn-default" onclick="input_text(); return false;">Submit</button></a>
@@ -30,5 +38,5 @@ Welcome to the aDViSOR
 {{super()}}
 <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
-<link rel="stylesheet" href="{{url_for('.static', filename='css/chatbot.css')}}"> 
+<link rel="stylesheet" href="{{url_for('static', filename='css/chatbot.css')}}"> 
 {% endblock %}
