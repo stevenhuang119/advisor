@@ -32,8 +32,7 @@ def clinc_process():
 
         resp = requests.post(url, json=payload, headers=headers)
 
-
-        ret = resp.json()['response']['slots'][0]['raw_value']['values'][0]['value']
+        ret = resp.json()['visuals']['formattedResponse']
 
         return jsonify(result = ret)
 
