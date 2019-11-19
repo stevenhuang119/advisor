@@ -6,28 +6,6 @@ from flask import request, abort, jsonify
 
 @backend.app.route('/chatbot/', methods=['GET', 'POST'])
 def chatbot():
-    url1 = "https://3.133.94.198/v1/oauth/"
-    #url2 = "https://3.133.104.132/v1/query/"
-    #url3 = "http://3.133.104.132/v1/apps/applicationtoken/"
-
-    # Data when using the password grant type
-    payload =(
-        "institution=eecs498team4",
-        "&username=user6",
-        "&password=password6",
-        "&grant_type=password"
-    )
-
-    headers = {
-        "Content-Type": "application/x-www-form-urlencoded",
-    }
-
-    print("sending payload")
-    response = requests.post(url1, json=payload, headers=headers)
-    print("payload received")
-
-    print(response.json())
-
     return flask.render_template("chatbot.html")
 
 @backend.app.route('/_clinc_process')
@@ -35,7 +13,29 @@ def clinc_process():
     try:
         text =  request.args.get('text', 0, type=str)
 
-        return jsonify(result = text + " (this is response)")
+        url = "https://api.clinc.ai/v1/query/"
+
+        payload = {
+            "query": text,
+            "language": "en",
+            "device": "Alexa",
+            "lat": 42.2810237,
+            "lon": -83.7467534,
+            "time_offset": 300,
+            "dialog": "40C0QYWuywZbF3AwFNNohraKgX8MotY"
+        }
+
+        headers = {
+            "Authorization": "app-key da5d9c7c2209566a349ff7ba2d74b530411bcfab",
+            "Content-Type": "application/json"
+        }
+
+        resp = requests.post(url, json=payload, headers=headers)
+
+
+        ret = resp.json()['response']['slots'][0]['raw_value']['values'][0]['value']
+
+        return jsonify(result = ret)
 
 
     except Exception as e:
