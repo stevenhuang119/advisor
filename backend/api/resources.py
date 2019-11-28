@@ -54,7 +54,7 @@ def advisor_webhook():
             course = body['slots']['_COURSE_NAME_']['values'][0]['course_mapper']
 
             if course in class_data.index: 
-                body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'The description for ' + course + ' is the following: ' + class_data.loc[course]['Description']     
+                body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'The description for ' + course + ' is the following: ' + class_data.loc[course]['Description'] + ' One student says this about the class: ' + class_data.loc[course]['StudentReview']    
 
             else:
                 body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'Sorry, class does not exist' 
