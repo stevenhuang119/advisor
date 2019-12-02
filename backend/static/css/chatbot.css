@@ -1,0 +1,19 @@
+.fixed-panel {
+    min-height: 300px;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+.right-chat {
+    padding-right: 10px;
+    padding-left: 50px;
+}
+
+.left-chat {
+    padding-left: 10px;
+    padding-right: 50px;
+}
+
+.left-panel-body {
+    background-color: lightskyblue;
+}

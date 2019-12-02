@@ -21,5 +21,6 @@ setup(
         'requests==2.22.0',
         'sh==1.12.14',
         'pandas==0.25.3',
+        'flask-bootstrap==3.3.7.1',
     ],
 )

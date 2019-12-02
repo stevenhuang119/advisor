@@ -2,9 +2,12 @@
 advisor package initializer.
 """
 import flask
+from flask_bootstrap import Bootstrap 
 
 # app is a single object used by all the code modules in this package
-app = flask.Flask(__name__)  # pylint: disable=invalid-name
+app = flask.Flask(__name__, static_folder="static", template_folder="templates")  # pylint: disable=invalid-name
+
+Bootstrap(app)
 
 app.config.from_object('backend.config')
 
@@ -18,3 +21,4 @@ app.config.from_envvar('backend_SETTINGS', silent=True)
 # (Reference http://flask.pocoo.org/docs/patterns/packages/)  We're
 # going to tell pylint and pycodestyle to ignore this coding style violation.
 import backend.api  # noqa: E402  pylint: disable=wrong-import-position
+import backend.views 
