@@ -29,7 +29,11 @@ function change_frame(dept, course) {
         url = "https://www.lsa.umich.edu/cg/cg_results.aspx?termArray=w_20_2270&cgtype=ug&show=20&department=" + dept + "&catalog=" + course;
         console.log(url); 
 
+        linkText = "Click here for more details on " + dept + " " + course; 
+
         document.getElementById('course_frame').src = url;
+        document.getElementById('site_link').href = url;
+        document.getElementById('site_link').text = linkText; 
     }
 
      

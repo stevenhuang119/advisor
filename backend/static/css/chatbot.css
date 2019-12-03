@@ -1,6 +1,6 @@
 .fixed-panel {
-    min-height: 300px;
-    max-height: 300px;
+    min-height: 60vh;
+    max-height: 60vh;
     overflow-y: scroll;
 }
 
@@ -16,4 +16,8 @@
 
 .left-panel-body {
     background-color: lightskyblue;
+}
+
+.restricted-header {
+    max-height: 20px; 
 }

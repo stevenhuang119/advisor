@@ -7,14 +7,17 @@ Welcome to the aDViSOR
 {% block content %}
 <div class="page-header">
     <div class="container">
-        <h1>aDViSOR</h1>
+        <h4>aDViSOR</h4>
     </div>
 </div>
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6" id='first_div'>
-            <iframe src="{{ url_for('static', filename='images/robo_advisor.jpg') }}" style='height:400px;width:600px;' id='course_frame'></iframe>
+            <iframe src="{{ url_for('static', filename='images/robo_advisor.jpg') }}" style='height:70vh;width:100%;' id='course_frame'></iframe>
+
+            <a href='#' target='_blank' class='btn btn-primary btn-lg btn-block' id='site_link'>Click here for more details</a>
+
         </div>
         <div class="col-md-6">
             <div class='panel panel-default'>
