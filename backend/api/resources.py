@@ -30,13 +30,31 @@ def webhook_test():
     else:
         abort(400)
 
+def drop_old_resolved_for_new(body):
+    to_delete_indices = []
+    num_resolved = 0
+    if len(body['slots']['_COURSE_NAME_']['values']) == 1:
+        return
+    for i in range(len(body['slots']['_COURSE_NAME_']['values'])):
+        if body['slots']['_COURSE_NAME_']['values'][i]['resolved'] == 1:
+            to_delete_indices.append(i)
+        if body['slots']['_COURSE_NAME_']['values'][i]['resolved'] == -1 and num_resolved == 0:
+            num_resolved += 1
+            body['slots']['_COURSE_NAME_']['values'][i]['resolved'] == 1
+
+    for index in to_delete_indices:
+        del body['slots']['_COURSE_NAME_']['values'][index]
+
+
 @backend.app.route('/api/v1/advisor_webhook', methods=['POST'])
 def advisor_webhook(): 
     body = request.json
     
+    print('---------STARTING RESPONSE CODE---------------')
     print(body)
 
     if '_COURSE_NAME_' in body['slots']:
+        drop_old_resolved_for_new(body)
         if body['state'] == "course_info":
             body['slots']['_COURSE_NAME_']['values'][0]['resolved'] = 1
             course = body['slots']['_COURSE_NAME_']['values'][0]['course_mapper']
