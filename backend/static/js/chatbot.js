@@ -31,7 +31,7 @@ function change_frame(dept, course) {
 
         linkText = "Click here for more details on " + dept + " " + course; 
 
-        document.getElementById('course_frame').src = url;
+        // document.getElementById('course_frame').src = url;
         document.getElementById('site_link').href = url;
         document.getElementById('site_link').text = linkText; 
     }

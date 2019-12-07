@@ -4,6 +4,12 @@
     overflow-y: scroll;
 }
 
+.fixed-panel-left {
+    min-height: 30vh; 
+    max-height: 30vh;
+    overflow-y: scroll; 
+}
+
 .right-chat {
     padding-right: 10px;
     padding-left: 50px;
