@@ -1,7 +1,13 @@
 .fixed-panel {
-    min-height: 300px;
-    max-height: 300px;
+    min-height: 60vh;
+    max-height: 60vh;
     overflow-y: scroll;
+}
+
+.fixed-panel-left {
+    min-height: 30vh; 
+    max-height: 30vh;
+    overflow-y: scroll; 
 }
 
 .right-chat {
@@ -16,4 +22,8 @@
 
 .left-panel-body {
     background-color: lightskyblue;
+}
+
+.restricted-header {
+    max-height: 20px; 
 }
