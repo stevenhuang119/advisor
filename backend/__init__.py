@@ -16,6 +16,8 @@ app.config.from_object('backend.config')
 # Reference: http://flask.pocoo.org/docs/config/
 app.config.from_envvar('backend_SETTINGS', silent=True)
 
+MASTER_DIALOG_TOKEN = '40C0QYWuywZbF3AwFNNohraKgX8MotY'
+
 # Tell our app about views and model.  This is dangerously close to a
 # circular import, which is naughty, but Flask was designed that way.
 # (Reference http://flask.pocoo.org/docs/patterns/packages/)  We're

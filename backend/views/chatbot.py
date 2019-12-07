@@ -6,6 +6,7 @@ from flask import request, abort, jsonify
 
 @backend.app.route('/chatbot/', methods=['GET', 'POST'])
 def chatbot():
+    backend.MASTER_DIALOG_TOKEN = '40C0QYWuywZbF3AwFNNohraKgX8MotY'
     return flask.render_template("chatbot.html")
 
 @backend.app.route('/_clinc_process')
@@ -22,7 +23,7 @@ def clinc_process():
             "lat": 42.2810237,
             "lon": -83.7467534,
             "time_offset": 300,
-            "dialog": "40C0QYWuywZbF3AwFNNohraKgX8MotY"
+            "dialog": backend.MASTER_DIALOG_TOKEN
         }
 
         headers = {
@@ -33,6 +34,10 @@ def clinc_process():
         resp = requests.post(url, json=payload, headers=headers)
 
         print(resp.json())
+
+        print('DIALOG KEY:')
+        print(resp.json()['dialog'])
+        backend.MASTER_DIALOG_TOKEN = resp.json()['dialog']
 
         dept = "null"
         course = "null"
