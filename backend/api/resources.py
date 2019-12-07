@@ -86,27 +86,33 @@ def advisor_webhook():
 
             return flask.jsonify(body)
 
-        elif body['state'] == "course_recommendation":
+    elif body['state'] == 'course_recommendation':
+        
+        if '_COURSE_CRITERIA_' in body['slots']:
             
-            body['slots']['_COURSE_NAME_']['values'][0]['resolved'] = 1
-            topic = body['slots']['_COURSE_NAME_']['values'][0]['course_mapper']
+            body['slots']['_COURSE_CRITERIA_']['values'][0]['resolved'] = 1
+            topic = body['slots']['_COURSE_CRITERIA_']['values'][0]['course_mapper']
             
             if topic == "Artificial Intelligence":
-                body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'You should look to take EECS 492, Artificial Intelligence.'
+                body['slots']['_COURSE_CRITERIA_']['values'][0]['value'] = 'You should look to take EECS 492, Artificial Intelligence.'
 
             elif topic == "Machine Learning":
-                body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'You should look to take EECS 445, Machine Learning.'
+                body['slots']['_COURSE_CRITERIA_']['values'][0]['value'] = 'You should look to take EECS 445, Machine Learning.'
 
             elif topic == "Web Development":
-                body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'You should look to take EECS 485, Web Systems, for full-stack development. EECS 484, Database Management Systems, will also give you backend knowledge. EECS 493, User Interface Development, will give you frontend experience.'
+                body['slots']['_COURSE_CRITERIA_']['values'][0]['value'] = 'You should look to take EECS 485, Web Systems, for full-stack development. EECS 484, Database Management Systems, will also give you backend knowledge. EECS 493, User Interface Development, will give you frontend experience.'
 
             elif topic == "MDE":
-                body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'Popular capstone/mde courses include EECS 497, Human-Centered Software and Design and Development, and EECS 441, Mobile App Development for Entrepreneurs. For a great special topics MDE course, check out EECS 498 Conversational AI'
+                body['slots']['_COURSE_CRITERIA_']['values'][0]['value'] = 'Popular capstone/mde courses include EECS 497, Human-Centered Software and Design and Development, and EECS 441, Mobile App Development for Entrepreneurs. For a great special topics MDE course, check out EECS 498 Conversational AI'
 
             else:
-                body['slots']['_COURSE_NAME_']['values'][0]['value'] = 'Sorry, I have no recommendation for you at this time. I could an issue with my mapper, or it could be that I am not trained to recommend in your requested area.' 
+                body['slots']['_COURSE_CRITERIA_']['values'][0]['value'] = 'Sorry, I have no recommendation for you at this time. I could an issue with my mapper, or it could be that I am not trained to recommend in your requested area.' 
 
             return flask.jsonify(body)
+
+        # else:
+        #     insert slot with default message here
+             
 
 
     else:
