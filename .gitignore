@@ -4,3 +4,6 @@ tmp
 cookies.txt
 session.json
 backend.egg-info
+*.pyc
+*.DS_Store
+.vscode/

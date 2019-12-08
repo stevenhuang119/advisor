@@ -124,10 +124,21 @@ def advisor_webhook():
                 body['slots']['_COURSE_CRITERIA_']['values'][0]['value'] = 'Popular capstone/mde courses include EECS 497, Human-Centered Software and Design and Development, and EECS 441, Mobile App Development for Entrepreneurs. For a great special topics MDE course, check out EECS 498 Conversational AI'
 
             else:
-                body['slots']['_COURSE_CRITERIA_']['values'][0]['value'] = 'Sorry, I have no recommendation for you at this time. I could an issue with my mapper, or it could be that I am not trained to recommend in your requested area.' 
+                body['slots']['_COURSE_CRITERIA_']['values'][0]['value'] = 'Sorry, I have no recommendation for you at this time. I could an issue with my mapper, or it could be that I am not trained to recommend in your requested area.'
 
             return flask.jsonify(body)
-
+        else:
+            body['slots']['_COURSE_CRITERIA_'] = {
+                'type': 'string',
+                'values': [
+                    {
+                        'tokens': '',
+                        'resolved': 1,
+                        'value': 'This is the default recommendation from an injected slot'
+                    }
+                ]
+            }
+            return flask.jsonify(body)
         # else:
         #     insert slot with default message here
              
