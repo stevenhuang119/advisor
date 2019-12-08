@@ -92,7 +92,7 @@ def clinc_process():
         review = "null"
         schedule = []
 
-        if resp.json()['response']['slots']:
+        if resp.json()['competency'] != 'course_recommendation' and resp.json()['response']['slots']:
             course_ret = resp.json()['response']['slots'][0]['raw_value']['values'][0]['course_mapper']
             course_ar = course_ret.split()
             dept = course_ar[0] #eecs
