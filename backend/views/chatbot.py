@@ -1,8 +1,56 @@
 import flask
 import backend
 import requests
+import pandas as pd
 
 from flask import request, abort, jsonify
+
+class_data = pd.read_csv('backend/api/coursework.csv')
+class_data.set_index('Course', inplace=True)
+
+schedule_data = pd.read_csv('backend/static/WN2020.csv')
+
+def make_schedule(dept, course):
+    schedule = []
+
+    print(dept)
+    print(type(course))
+    
+    if dept == "EECS":
+        df = schedule_data.loc[(schedule_data['Catalog Nbr'] == float(course))]
+
+        for i, j in df.iterrows():
+            comp = str(j.loc['Component'])
+            mon = str(j.loc['M'])
+            tues = str(j.loc['T'])
+            wed = str(j.loc['W'])
+            thur = str(j.loc['TH'])
+            fri = str(j.loc['F'])
+            time = str(j.loc['Time'])
+
+            time_slot = comp + " "
+
+            if mon != "nan":
+                time_slot += mon + " "    
+
+            if tues != "nan":
+                time_slot += tues + " "
+
+            if wed != "nan":
+                time_slot += wed + " "
+
+            if thur != "nan":
+                time_slot += thur + " "
+
+            if fri != "nan":
+                time_slot += fri + " "
+            
+            time_slot += time
+
+            schedule.append(time_slot)
+
+    print(schedule)
+    return schedule
 
 @backend.app.route('/chatbot/', methods=['GET', 'POST'])
 def chatbot():
@@ -41,20 +89,24 @@ def clinc_process():
 
         dept = "null"
         course = "null"
+        review = "null"
+        schedule = []
 
         if resp.json()['response']['slots']:
             course_ret = resp.json()['response']['slots'][0]['raw_value']['values'][0]['course_mapper']
             course_ar = course_ret.split()
-            dept = course_ar[0]
-            course = course_ar[1]
+            dept = course_ar[0] #eecs
+            course = course_ar[1] #281
 
+            review = class_data.loc[course_ret]['StudentReview']
+
+            schedule = make_schedule(dept, course)
 
         ret = resp.json()['visuals']['formattedResponse']
 
-        return jsonify(result = ret, dept = dept, course = course)
+        print("---------------------Clinc Process Finished--------------------------------")
+        return jsonify(result = ret, dept = dept, course = course, review = review, schedule = schedule)
 
 
     except Exception as e:
         return str(e)
-
-

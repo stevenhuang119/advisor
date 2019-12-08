@@ -16,11 +16,11 @@ Welcome to the aDViSOR
         <div class="col-md-6" id='first_div'>
             <div class='panel panel-default fixed-panel-left'>
                 <div class='panel-heading'>Schedule</div>
-                <div class='panel-body'></div>
+                <div class='panel-body' id='schedule_body'></div>
             </div>
             <div class='panel panel-default fixed-panel-left'>
-                <div class='panel-heading'>Reviews</div>
-                <div class='panel-body'></div>
+                <div class='panel-heading'>Student Reviews</div>
+                <div class='panel-body' id='reviews_body'></div>
             </div>
             
             <!-- <iframe src="{{ url_for('static', filename='images/robo_advisor.jpg') }}" style='height:70vh;width:100%;' id='course_frame'></iframe> -->
@@ -38,7 +38,7 @@ Welcome to the aDViSOR
 
             <form class='form-inline'>
                 <input type='text' class='form-control' id='chat_text' placeholder="Type here...">
-                <a href='#' id='chat_input'><button type="submit" class="btn btn-default" onclick="input_text(); return false;">Submit</button></a>
+                <a href='#' id='chat_input'><button type="submit" class="btn btn-default" onclick="input_text(); this.form.reset(); return false;">Submit</button></a>
             </form>
         </div>
     </div>

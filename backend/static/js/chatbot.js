@@ -34,9 +34,31 @@ function change_frame(dept, course) {
         // document.getElementById('course_frame').src = url;
         document.getElementById('site_link').href = url;
         document.getElementById('site_link').text = linkText; 
-    }
+    }    
+}
 
-     
+function change_review(review) {
+    if (review != "null"){
+        var obj = document.getElementById('reviews_body'); 
+        obj.innerHTML = review;  
+    }
+}
+
+function change_schedule(schedule) {
+    if (schedule != undefined && schedule.length != 0 ){
+        var obj = document.getElementById('schedule_body'); 
+
+        while (obj.firstChild) {
+            obj.removeChild(obj.firstChild); 
+        }
+        
+        for (i = 0 ; i < schedule.length ; i++){
+            const div = document.createElement('div'); 
+            
+            div.innerHTML = schedule[i]; 
+            obj.appendChild(div); 
+        }
+    }
 }
 
 
@@ -48,10 +70,14 @@ function input_text() {
     $.getJSON('/_clinc_process', {text: text}, function(data) {
         console.log(data.result)
         console.log(data.dept);
-        console.log(data.course); 
+        console.log(data.course);
+        console.log(data.review); 
+        console.log(data.schedule); 
 
         add_row_left(data.result); 
-        change_frame(data.dept, data.course)
+        change_frame(data.dept, data.course); 
+        change_review(data.review);
+        change_schedule(data.schedule); 
     }
     );
 
