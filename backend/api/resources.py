@@ -109,7 +109,7 @@ def advisor_webhook():
         if '_COURSE_CRITERIA_' in body['slots']:
             
             body['slots']['_COURSE_CRITERIA_']['values'][0]['resolved'] = 1
-            topic = body['slots']['_COURSE_CRITERIA_']['values'][0]['course_mapper']
+            topic = body['slots']['_COURSE_CRITERIA_']['values'][0]['criteria_mapper']
             
             if topic == "Artificial Intelligence":
                 body['slots']['_COURSE_CRITERIA_']['values'][0]['value'] = 'You should look to take EECS 492, Artificial Intelligence.'
@@ -132,9 +132,10 @@ def advisor_webhook():
                 'type': 'string',
                 'values': [
                     {
+                        'course_mapper': 'EECS 376',
                         'tokens': '',
                         'resolved': 1,
-                        'value': 'This is the default recommendation from an injected slot'
+                        'value': 'You should take EECS 376 next'
                     }
                 ]
             }
