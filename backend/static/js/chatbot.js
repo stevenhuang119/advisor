@@ -53,10 +53,11 @@ function change_schedule(schedule) {
         }
         
         for (i = 0 ; i < schedule.length ; i++){
-            const div = document.createElement('div'); 
-            
-            div.innerHTML = schedule[i]; 
-            obj.appendChild(div); 
+            const li = document.createElement('li'); 
+            li.className = 'list-group-item'; 
+
+            li.innerHTML =  schedule[i]; 
+            obj.appendChild(li); 
         }
     }
 }
