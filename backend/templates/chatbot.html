@@ -5,13 +5,23 @@ Welcome to the aDViSOR
 {% endblock %}
 
 {% block content %}
-<div class="page-header">
+<!-- <div class="page-header">
     <div class="container">
+        <img src="{{ url_for('static', filename='images/robo_adviser_closeup.jpeg') }}" style="height: 80px;">
         <h4>aDViSOR</h4>
     </div>
-</div>
+</div> -->
 
 <div class="container-fluid">
+    <div class="row">
+        <div class='col-md-1'>
+            <img src="{{ url_for('static', filename='images/robo_adviser_closeup.jpeg') }}" style="height: 80px; padding: 10px;">
+        </div>
+        <div class='col-md-11'>
+            <h1><b>a</b>DV<b>i</b>SOR</h1>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-6" id='first_div'>
             <div class='panel panel-default fixed-panel-left'>
