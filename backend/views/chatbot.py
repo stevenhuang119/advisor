@@ -92,15 +92,16 @@ def clinc_process():
         review = "null"
         schedule = []
 
-        if resp.json()['competency'] != 'course_recommendation' and resp.json()['response']['slots']:
+        if resp.json()['competency'] == 'course_info' and resp.json()['response']['slots']:
             course_ret = resp.json()['response']['slots'][0]['raw_value']['values'][0]['course_mapper']
-            course_ar = course_ret.split()
-            dept = course_ar[0] #eecs
-            course = course_ar[1] #281
+            if course_ret != 'NULL':
+                course_ar = course_ret.split()
+                dept = course_ar[0] #eecs
+                course = course_ar[1] #281
 
-            review = class_data.loc[course_ret]['StudentReview']
+                review = class_data.loc[course_ret]['StudentReview']
 
-            schedule = make_schedule(dept, course)
+                schedule = make_schedule(dept, course)
 
         ret = resp.json()['visuals']['formattedResponse']
 
