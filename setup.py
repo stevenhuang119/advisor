@@ -18,7 +18,7 @@ setup(
         'pydocstyle==4.0.1',
         'pylint==2.3.1',
         'pytest==5.1.2',
-        'requests==2.22.0',
+        'requests==2.31.0',
         'sh==1.12.14',
         'pandas==0.25.3',
         'flask-bootstrap==3.3.7.1',
